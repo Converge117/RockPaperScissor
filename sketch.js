@@ -2,6 +2,12 @@
 
 let playerScore = 0;
 let computerScore = 0;
+let button = document.querySelectorAll('button');//returns a nodelist not a single value 
+console.log(button);
+
+button.forEach(button => {//iterating over the nodelist
+button.addEventListener('click',setGame)});
+
 /* let playerSelection;
  let computerSelection;*/
 
@@ -9,7 +15,7 @@ function getComputerChoice() {
 
     let choice;
     switch (Math.floor(Math.random() * 3)) {
-        case 0:
+        case 0: 
             choice = 'rock';
             break;
         case 1: choice = 'paper';
@@ -63,12 +69,6 @@ function setGame(e){
 
 }
 
-let button = document.querySelectorAll('button');
-
-button.forEach(button => {
-button.addEventListener('click',setGame)});
-
-
 function game(playerSelection) {
 
     
@@ -80,12 +80,22 @@ function game(playerSelection) {
 
                /*let result=*///console.log
                let result=playRound(playerSelection, computerSelection);
-               document.querySelector('div').textContent = result;
+            let div1= document.querySelector('#result')
+               div1.textContent = result;
         //console.log(result);
       /*  console.log('computer score is ' + computerScore);
         console.log('Player score is ' + playerScore);*/
    // }
    // (playerScore > computerScore) ? console.log('You win') : console.log('You lose');// its not recommended becoz its not easily readable by others
+   if(playerScore == 2 || computerScore == 2){
+   const score= document.createElement('div');
+
+    if (playerScore > computerScore) score.textContent=`User wins by reaching a score of ${playerScore} first`;// if statement with out {} as the exprression is a single line
+    else score.textContent=`Computer wins by reaching a score of ${computerScore} first`;
+     div1.appendChild(score);// adding it as a child div of div1
+     button.forEach(button => {//iterating over the nodelist
+     button.removeEventListener('click',setGame)});//diables the buttons by rermoving event listers
+   }
 
 }
 /*let count = prompt('How many rounds do you want play', 'type a number');
