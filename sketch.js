@@ -25,6 +25,7 @@ function getComputerChoice() {
 
 
 function playRound(a, b) {
+    console.log('playing');
     if (a === b) {
         return `Draw! ${a} is equal to ${b}`
     } else if (a === 'rock') {
@@ -54,24 +55,39 @@ function playRound(a, b) {
     }
 }
 
-function game(count) {
-
-    let playerSelection;
-    let computerSelection;
-    noOfRuns = count;
-    for (i = 0; i < noOfRuns; i++) {
-        playerSelection = prompt('enter your choice', 'Rock/Paper/Scissor');
-        playerSelection = playerSelection.toLowerCase();
-
-        computerSelection = getComputerChoice();
-
-               /*let result=*/console.log(playRound(playerSelection, computerSelection));
-        //console.log(result);
-        console.log('computer score is ' + computerScore);
-        console.log('Player score is ' + playerScore);
-    }
-    (playerScore > computerScore) ? console.log('You win') : console.log('You lose');// its not recommended becoz its not easily readable by others
+function setGame(e){
+    //(e) => {
+    console.log(e);
+   let playerSelection = e.target.textContent;
+  game(playerSelection);// }
 
 }
-let count = prompt('How many rounds do you want play', 'type a number');
-game(count);
+
+let button = document.querySelectorAll('button');
+
+button.forEach(button => {
+button.addEventListener('click',setGame)});
+
+
+function game(playerSelection) {
+
+    
+   // noOfRuns = count;
+   // for (i = 0; i < noOfRuns; i++) {
+       // playerSelection = prompt('enter your choice', 'Rock/Paper/Scissor');
+        playerSelection = playerSelection.toLowerCase();    
+       let computerSelection = getComputerChoice();
+
+               /*let result=*///console.log
+               let result=playRound(playerSelection, computerSelection);
+               document.querySelector('div').textContent = result;
+        //console.log(result);
+      /*  console.log('computer score is ' + computerScore);
+        console.log('Player score is ' + playerScore);*/
+   // }
+   // (playerScore > computerScore) ? console.log('You win') : console.log('You lose');// its not recommended becoz its not easily readable by others
+
+}
+/*let count = prompt('How many rounds do you want play', 'type a number');
+game(count);*/
+//game();
